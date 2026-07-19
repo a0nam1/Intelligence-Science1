@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vite/
+coverage/
+.agents/
+.codex/
+*.log
+.env
+.env.*
+outputs/
+work/
