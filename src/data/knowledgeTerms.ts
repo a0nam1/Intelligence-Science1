@@ -68,6 +68,78 @@ export const knowledgeTerms: KnowledgeQuestion[] = [
     answer: "実数値遺伝的アルゴリズム",
   },
   {
+    id: "ga-individual",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝的アルゴリズムでは、問題の解は（　）と呼ばれ、ベクトルで表現される。",
+    answer: "個体",
+    acceptedAnswers: ["individual"],
+    explanation:
+      "遺伝的アルゴリズムでは、問題の解の候補を個体と呼びます。個体は、複数の遺伝子から構成されるベクトルや文字列として表現されます。",
+  },
+  {
+    id: "ga-gene",
+    category: "遺伝的アルゴリズム",
+    question: "個体（ベクトル）が持つ各要素を（　）と呼ぶ。",
+    answer: "遺伝子",
+    acceptedAnswers: ["gene"],
+    explanation:
+      "個体を構成する各要素を遺伝子と呼びます。例えば、二進数で表された個体では、それぞれの0または1が遺伝子に相当します。",
+  },
+  {
+    id: "ga-fitness",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝的アルゴリズムにおいて、「個体（解）がどの程度良いかを表す値」の名称を答えてください。",
+    answer: "適応度",
+    acceptedAnswers: ["fitness"],
+    explanation:
+      "適応度は、その個体が問題の解としてどの程度優れているかを数値で表したものです。一般的には、適応度が高い個体ほど次の世代に残りやすくなります。",
+  },
+  {
+    id: "ga-selection",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝的アルゴリズムの操作のうち、「現在の集団から、次に残す個体を選ぶ」操作の名称を答えてください。",
+    answer: "選択",
+    acceptedAnswers: ["selection"],
+    explanation:
+      "選択は、現在の集団の中から次の世代へ残す個体や、交叉に使用する親個体を選ぶ操作です。",
+  },
+  {
+    id: "ga-crossover",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝的アルゴリズムの操作のうち、「2つ、またはそれ以上の個体を混ぜ合わせ、元の個体の特徴を併せ持つ新しい個体を生成する」操作の名称を答えてください。",
+    answer: "交叉",
+    acceptedAnswers: ["crossover"],
+    explanation:
+      "交叉は、複数の親個体の遺伝子を組み合わせて、新しい子個体を生成する操作です。一点交叉や二点交叉などの方法があります。",
+  },
+  {
+    id: "ga-mutation-operation",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝的アルゴリズムの操作のうち、「個体が持つ遺伝子のうちの一部を変更する」操作の名称を答えてください。",
+    answer: "突然変異",
+    acceptedAnswers: ["mutation"],
+    explanation:
+      "突然変異は、個体の一部の遺伝子を一定の確率で変化させる操作です。二進数の遺伝子では、0を1に、1を0に反転させる方法などがあります。",
+  },
+  {
+    id: "ga-mutation",
+    category: "遺伝的アルゴリズム",
+    question: "遺伝子列の指定された位置において、0を1に、1を0に変化させる操作を何というか。",
+    answer: "突然変異",
+  },
+  {
+    id: "ga-theoretical-maximum-fitness",
+    category: "遺伝的アルゴリズム",
+    question: "すべての遺伝子の組み合わせを調べて得られる、最も高い適応度を何というか。",
+    answer: "理論上の最大適応度",
+  },
+  {
+    id: "ga-odd-position",
+    category: "遺伝的アルゴリズム",
+    question: "1番目、3番目、5番目のような位置を何というか。",
+    answer: "奇数位置",
+  },
+  {
     id: "ga-tsp-crossover",
     category: "遺伝的アルゴリズム",
     question: "巡回セールスマン問題で都市番号をそのまま遺伝子として表現する場合、誤っている説明を1つ選びなさい。",

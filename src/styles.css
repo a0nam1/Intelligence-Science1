@@ -826,6 +826,39 @@ th {
   color: #176f43;
 }
 
+.chromosome-position-row .gene-cell {
+  background: #eef7fb;
+  color: #486376;
+  font-size: 0.78rem;
+}
+
+.chromosome-position-row .active-gene,
+.active-gene {
+  border-color: #f2a33a;
+  background: #fff6e8;
+  color: #a85d00;
+}
+
+.mono-text {
+  font-family: "Cascadia Mono", "Consolas", monospace;
+  letter-spacing: 0;
+}
+
+.mutation-detail-list {
+  display: grid;
+  gap: 0.35rem;
+  border: 1px solid #dbe6ee;
+  border-radius: 8px;
+  background: #fbfdff;
+  padding: 0.85rem;
+}
+
+.mutation-detail-list p {
+  margin: 0;
+  color: #2f4c60;
+  font-weight: 800;
+}
+
 .fitness-bar-row {
   display: grid;
   grid-template-columns: 88px 1fr 80px;
@@ -1315,9 +1348,9 @@ textarea:focus {
 }
 
 .active-gene {
-  border-color: #0b9a9c;
-  background: #eefafa;
-  color: #087a7e;
+  border-color: #f2a33a;
+  background: #fff6e8;
+  color: #a85d00;
 }
 
 @media (max-width: 1100px) {

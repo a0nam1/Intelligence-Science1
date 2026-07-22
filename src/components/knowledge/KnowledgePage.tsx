@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { knowledgeTerms } from "../../data/knowledgeTerms";
+import { getKnowledgeAnswerText, searchKnowledgeQuestions } from "../../lib/knowledge";
 import type { KnowledgeCategory } from "../../types/knowledge";
 import { KnowledgeCard } from "./KnowledgeCard";
 import { KnowledgeFilters } from "./KnowledgeFilters";
@@ -13,12 +14,7 @@ export function KnowledgePage() {
   const [visible, setVisible] = useState(false);
 
   const filtered = useMemo(() => {
-    const keyword = search.trim().toLowerCase();
-    return knowledgeTerms.filter((item) => {
-      const answer = Array.isArray(item.answer) ? item.answer.join(" ") : item.answer;
-      const text = `${item.question} ${answer} ${item.explanation ?? ""}`.toLowerCase();
-      return (category === "すべて" || item.category === category) && (!keyword || text.includes(keyword));
-    });
+    return searchKnowledgeQuestions(knowledgeTerms, search, category);
   }, [category, search]);
 
   const safeIndex = filtered.length ? Math.min(index, filtered.length - 1) : 0;
@@ -56,10 +52,11 @@ export function KnowledgePage() {
       {current ? (
         <>
           <KnowledgeCard
+            key={current.id}
             item={current}
             visible={visible}
             onToggleVisible={() => setVisible((currentVisible) => !currentVisible)}
-            onCopy={async () => navigator.clipboard.writeText(Array.isArray(current.answer) ? current.answer.join(" / ") : current.answer)}
+            onCopy={async () => navigator.clipboard.writeText(getKnowledgeAnswerText(current))}
           />
           <div className="button-row">
             <button type="button" className="secondary-button" onClick={() => move(-1)}>前の問題へ</button>

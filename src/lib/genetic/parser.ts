@@ -15,6 +15,19 @@ export function parseGeneSequence(value: string): string[] {
   return [...trimmed];
 }
 
+export function parsePositionList(value: string): number[] {
+  const matches = value.match(/\d+/g);
+  if (!matches) {
+    throw new Error("位置を1つ以上入力してください。");
+  }
+
+  const positions = matches.map((token) => Number(token));
+  if (positions.some((position) => !Number.isSafeInteger(position))) {
+    throw new Error("位置は安全に扱える整数で入力してください。");
+  }
+  return [...new Set(positions)];
+}
+
 export function parseFitnessList(value: string): number[] {
   const tokens = value
     .trim()

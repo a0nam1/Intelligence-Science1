@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { BlxAlphaCalculator } from "./BlxAlphaCalculator";
 import { GeneCountCalculator } from "./GeneCountCalculator";
+import { MaximumFitnessCalculator } from "./MaximumFitnessCalculator";
+import { MutationCalculator } from "./MutationCalculator";
 import { OnePointCrossoverCalculator } from "./OnePointCrossoverCalculator";
+import { PositionCrossoverCalculator } from "./PositionCrossoverCalculator";
 import { RouletteSelectionCalculator } from "./RouletteSelectionCalculator";
 import { TournamentSelectionCalculator } from "./TournamentSelectionCalculator";
 import { TwoPointCrossoverCalculator } from "./TwoPointCrossoverCalculator";
 
-type GeneticTab = "one" | "two" | "roulette" | "tournament" | "gene-count" | "blx";
+type GeneticTab = "one" | "two" | "position" | "mutation" | "maximum-fitness" | "roulette" | "tournament" | "gene-count" | "blx";
 
 const tabs: { id: GeneticTab; label: string }[] = [
   { id: "one", label: "一点交叉" },
   { id: "two", label: "二点交叉" },
+  { id: "position", label: "奇数位置交叉" },
+  { id: "mutation", label: "突然変異" },
+  { id: "maximum-fitness", label: "最大適応度" },
   { id: "roulette", label: "ルーレット選択" },
   { id: "tournament", label: "トーナメント選択" },
   { id: "gene-count", label: "遺伝子数" },
@@ -34,6 +40,9 @@ export function GeneticAlgorithmPage() {
       <div className="cards-grid ga-inner-grid">
         {active === "one" && <OnePointCrossoverCalculator />}
         {active === "two" && <TwoPointCrossoverCalculator />}
+        {active === "position" && <PositionCrossoverCalculator />}
+        {active === "mutation" && <MutationCalculator />}
+        {active === "maximum-fitness" && <MaximumFitnessCalculator />}
         {active === "roulette" && <RouletteSelectionCalculator />}
         {active === "tournament" && <TournamentSelectionCalculator />}
         {active === "gene-count" && <GeneCountCalculator />}

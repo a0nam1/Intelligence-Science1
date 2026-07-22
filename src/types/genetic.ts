@@ -3,6 +3,32 @@ export type CrossoverResult = {
   secondChild: string[];
 };
 
+export type PositionCrossoverResult = {
+  firstChild: string[];
+  secondChild: string[];
+  exchangedPositions: number[];
+};
+
+export type MutationResult = {
+  originalGenes: string[];
+  mutatedGenes: string[];
+  mutatedPositions: number[];
+};
+
+export type FitnessEvaluation = {
+  genes: string;
+  decimalValue: number;
+  fitness: number;
+};
+
+export type MaximumFitnessResult = {
+  bitLength: number;
+  combinationCount: number;
+  maximumFitness: number;
+  bestIndividuals: FitnessEvaluation[];
+  topEvaluations: FitnessEvaluation[];
+};
+
 export type RouletteIndividual = {
   id: string;
   name: string;

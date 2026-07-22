@@ -1,4 +1,4 @@
-import type { CrossoverResult } from "../../types/genetic";
+import type { CrossoverResult, PositionCrossoverResult } from "../../types/genetic";
 
 export function onePointCrossover(
   firstParent: string[],
@@ -46,6 +46,35 @@ export function twoPointCrossover(
   };
 }
 
+export function crossoverByPositions(
+  firstParent: string[],
+  secondParent: string[],
+  positions: number[],
+): PositionCrossoverResult {
+  validateParents(firstParent, secondParent);
+  validateBinaryGenes(firstParent, "個体1");
+  validateBinaryGenes(secondParent, "個体2");
+
+  const exchangedPositions = normalizePositions(positions, firstParent.length);
+  const exchangedSet = new Set(exchangedPositions);
+
+  return {
+    firstChild: firstParent.map((gene, index) => (exchangedSet.has(index + 1) ? secondParent[index] : gene)),
+    secondChild: secondParent.map((gene, index) => (exchangedSet.has(index + 1) ? firstParent[index] : gene)),
+    exchangedPositions,
+  };
+}
+
+export function crossoverOddPositions(firstParent: string[], secondParent: string[]): PositionCrossoverResult {
+  validateParents(firstParent, secondParent);
+  return crossoverByPositions(firstParent, secondParent, positionsByParity(firstParent.length, "odd"));
+}
+
+export function crossoverEvenPositions(firstParent: string[], secondParent: string[]): PositionCrossoverResult {
+  validateParents(firstParent, secondParent);
+  return crossoverByPositions(firstParent, secondParent, positionsByParity(firstParent.length, "even"));
+}
+
 function validateParents(firstParent: string[], secondParent: string[]): void {
   if (firstParent.length === 0 || secondParent.length === 0) {
     throw new Error("個体の遺伝子列は空にできません。");
@@ -53,4 +82,36 @@ function validateParents(firstParent: string[], secondParent: string[]): void {
   if (firstParent.length !== secondParent.length) {
     throw new Error("個体1と個体2の遺伝子数が一致していません。");
   }
+}
+
+function validateBinaryGenes(genes: string[], label: string): void {
+  const invalidGene = genes.find((gene) => gene !== "0" && gene !== "1");
+  if (invalidGene !== undefined) {
+    throw new Error(`${label}の遺伝子は0または1だけで入力してください。`);
+  }
+}
+
+function normalizePositions(positions: number[], geneCount: number): number[] {
+  const uniquePositions = [...new Set(positions)];
+  if (uniquePositions.length === 0) {
+    throw new Error("交換対象の位置を1つ以上指定してください。");
+  }
+  for (const position of uniquePositions) {
+    if (!Number.isInteger(position)) {
+      throw new Error("交換対象の位置は整数で入力してください。");
+    }
+    if (position < 1 || position > geneCount) {
+      throw new Error("交換対象の位置は1以上、遺伝子数以下で入力してください。");
+    }
+  }
+  return uniquePositions.sort((first, second) => first - second);
+}
+
+function positionsByParity(geneCount: number, parity: "odd" | "even"): number[] {
+  const start = parity === "odd" ? 1 : 2;
+  const positions: number[] = [];
+  for (let position = start; position <= geneCount; position += 2) {
+    positions.push(position);
+  }
+  return positions;
 }

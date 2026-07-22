@@ -10,4 +10,5 @@ export type KnowledgeQuestion = {
     text: string;
   }[];
   explanation?: string;
+  acceptedAnswers?: string[];
 };
